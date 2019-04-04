@@ -1,6 +1,9 @@
 /*
 	A bunch of tests that I'm doing and I would like to save in case
 	I want to take a look later or to make further tests.
+	
+	Initially I'm using the free classes on Udacity as a base for my studies
+	So many of the tests here may looks similar to the ones from there.
 */
 
 task groovy << {}
@@ -58,7 +61,7 @@ task helloWorld {
     }
 }
 
-task closureFunctions {
+task functionsTesting {
 	doLast {
 		def xoo = "Whatever you want"
 		def myClosureFunction = {
@@ -83,7 +86,7 @@ task closureFunctions {
 	}
 }
 
-task listsTest {
+task listsTesting {
 	doLast {
 		def myList = [1,2,4]
 		def sum = 0
@@ -97,5 +100,30 @@ task listsTest {
 		println "the sum is: $sum"
 		
 		myList.each{println "Compactly printing: $it"}
+	}
+}
+
+/* Classes cannot be declared inside a task */
+class MyClass {
+	String name = "Mr. Robot"
+	def printWelcome() { println "Welcome $name" }
+}
+
+task classesTesting {
+	doLast {
+		
+		def myObject = new MyClass()
+		
+		myObject.printWelcome()
+		myObject.name = "Tarcisio"
+		myObject.printWelcome()
+		
+		def functionDelegatingClosure = {
+			name = "Jowls Beans"
+			printWelcome()
+		}
+		
+		functionDelegatingClosure.delegate = myObject
+		functionDelegatingClosure()
 	}
 }
