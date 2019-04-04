@@ -227,3 +227,18 @@ task getEquipped {
 
 
 println mySuperHero
+
+
+class HelloNameTask extends DefaultTask {
+	String firstname 
+	
+	@TaskAction
+	void doAction() {
+		println "Hello, $firstname"
+	}
+}
+
+
+task helloName(type:HelloNameTask) {
+	firstname = mySuperHero
+}
