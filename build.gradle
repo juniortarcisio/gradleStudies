@@ -1,0 +1,59 @@
+/*
+	A bunch of tests that I'm doing and I would like to save in case
+	I want to take a look later or to make further tests.
+*/
+
+task helloWorld {
+    doLast{
+        println "Hello, World!"        
+    }
+}
+
+task groovy << {}
+
+println "Hello Groovy"
+
+class JavaGreeter {
+	public static void sayHello() {
+		System.out.println("Hello Java!");
+	}
+}
+
+JavaGreeter greeter = new JavaGreeter()
+greeter.sayHello()
+
+def foo = 6.5
+
+println "foo has value : $foo"
+
+println "Calculation test: ${5 + 6}"
+
+println "type of foo: ${foo.class}"
+
+foo = "a string"
+
+println "foo has value : $foo"
+
+println "type of foo: ${foo.class}"
+
+def powIt(n) {
+	n * n
+}
+
+foo = 9
+println "powIt $foo result: ${powIt(foo)}"
+
+def funcOneArg(x) {
+	println "Called the function funcOneArg with arg $x"
+	x
+}
+
+def funcTwoArgs(x,y) {
+	println "Called the function funcTwoArgs with the args $x and $y"
+	x + y
+}
+
+funcOneArg 1
+funcTwoArgs 2, 3
+
+funcTwoArgs funcOneArg(1), 2
