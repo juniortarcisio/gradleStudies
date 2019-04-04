@@ -82,3 +82,20 @@ task closureFunctions {
 		println "Executing powIt twice gives you the result $testApplyTwiceResult"
 	}
 }
+
+task listsTest {
+	doLast {
+		def myList = [1,2,4]
+		def sum = 0
+		
+		def printItem = { item -> println "item: $item" }
+		def sumItem = { item -> sum = sum + item }
+		
+		myList.each(printItem)
+		myList.each(sumItem)
+		
+		println "the sum is: $sum"
+		
+		myList.each{println "Compactly printing: $it"}
+	}
+}
