@@ -3,12 +3,6 @@
 	I want to take a look later or to make further tests.
 */
 
-task helloWorld {
-    doLast{
-        println "Hello, World!"        
-    }
-}
-
 task groovy << {}
 
 println "Hello Groovy"
@@ -57,3 +51,34 @@ funcOneArg 1
 funcTwoArgs 2, 3
 
 funcTwoArgs funcOneArg(1), 2
+
+task helloWorld {
+    doLast{
+        println "Hello, World!"        
+    }
+}
+
+task closureFunctions {
+	doLast {
+		def xoo = "Whatever you want"
+		def myClosureFunction = {
+			println "Closure functions also capture variables from it's enclosing environment"
+			println "Capturing the value of xoo: $xoo"
+		}
+		
+		myClosureFunction()
+		
+		println "It also can be passed to variables (like a delegate)"
+		def xar = myClosureFunction
+		def xuu = xar
+		xuu()
+				
+		def powItClosure = { x ->  x * x }
+		
+		def applyTwice = { func, arg -> func(func(arg)) }
+		
+				
+		def testApplyTwiceResult = applyTwice(powItClosure, 3)
+		println "Executing powIt twice gives you the result $testApplyTwiceResult"
+	}
+}
