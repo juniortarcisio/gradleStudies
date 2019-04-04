@@ -224,3 +224,6 @@ task getEquipped {
 		println "All geared up!"
 	}
 }
+
+
+println mySuperHero
