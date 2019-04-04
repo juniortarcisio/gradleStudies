@@ -4,6 +4,12 @@
 	
 	Initially I'm using the free classes on Udacity as a base for my studies
 	So many of the tests here may looks similar to the ones from there.
+	
+	useful links:
+	https://classroom.udacity.com/courses/ud867/
+	http://groovy-lang.org/documentation.html
+	https://learnxinyminutes.com/docs/groovy/
+	https://github.com/apache/groovy
 */
 
 task groovy << {}
@@ -127,3 +133,87 @@ task classesTesting {
 		functionDelegatingClosure()
 	}
 }
+
+
+task putOnSocks {
+	doLast {
+		println "Putting on Socks"
+	}
+}
+
+task putOnShoes {
+	dependsOn "putOnSocks"
+	doLast {
+		println "Putting on Shoes"
+	}
+}
+
+/* 
+grande -q putOnShoes 
+	   -q quite mode, doesn't output diagnostic messages 
+	   
+automatically runs the dependent task
+	
+...	
+Putting on Socks
+Putting on Shoes
+...
+
+*/
+
+task eatBreakFast {
+	finalizedBy "brushYourTeeth"
+	doLast {
+		println "Nhac nhac nhac! Breakfast!"
+	}
+}
+
+task brushYourTeeth {
+	doLast {
+		println "Brushie Brushie Brushie..."
+	}
+}
+
+
+
+task takeShower {	
+	doLast {
+		println "Taking a shower"
+	}
+}
+
+task putOnFragance {
+	shouldRunAfter "takeShower"
+	doLast {
+		println "Putting a smelly fragance"
+	}
+}
+
+
+/* 
+grande -q putOnFragance takeShower
+	   
+automatically reorder to take the shower first
+	
+...	
+Taking a shower
+Putting a smelly fragance
+...
+
+*/
+
+task getReady {
+	dependsOn = ["putOnFragance","eatBreakFast","takeShower","putOnShoes"]
+}
+
+
+
+/* 
+grande -q getReady
+	   
+runs on the following order
+...	
+bfast, brush, shower, fragance, socks, shoes...
+...
+
+*/
