@@ -206,7 +206,7 @@ task getReady {
 	dependsOn = ["putOnFragance","eatBreakFast","takeShower","putOnShoes"]
 }
 
-
+putOnSocks.mustRunAfter takeShower
 
 /* 
 grande -q getReady
@@ -217,3 +217,10 @@ bfast, brush, shower, fragance, socks, shoes...
 ...
 
 */
+
+task getEquipped {
+	dependsOn tasks.matching{ task -> task.name.startsWith("putOn") }
+	doLast {
+		println "All geared up!"
+	}
+}
